@@ -1,0 +1,151 @@
+// The post scrubber as a glass panel: "Original post" and "Now" as rows, a rail
+// that fills with the accent up to where you are (a progress bar), a glowing
+// ring for the handle and the position in display numerals.
+// Desktop: the side list's scrubber item. Phones: core's dropdown under the
+// title bar, kept clear of the phone bar.
+
+html[data-duskline] {
+  .Scrubber-first, .Scrubber-last {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-start;
+    width: 100% !important;
+    min-height: 36px;
+    padding: 0 8px !important;
+    border-radius: 10px;
+    color: var(--text-color);
+    font-weight: 600;
+    text-decoration: none !important;
+
+    .Button-icon { color: var(--muted-color); margin: 0; }
+    &:hover, &:focus-visible {
+      background: var(--control-bg);
+      color: var(--dusk-accent);
+      .Button-icon { color: var(--dusk-accent); }
+    }
+  }
+
+  .Scrubber-scrollbar { margin: 10px 0 10px 18px; }
+
+  // The rail: read posts in the accent, the rest a quiet track.
+  .Scrubber-before, .Scrubber-after {
+    border-left: 4px solid var(--dusk-line);
+    margin-left: -2px;
+  }
+  .Scrubber-before {
+    border-image: linear-gradient(180deg, #3FD8CB, var(--dusk-accent)) 1;
+  }
+  .Scrubber-unread {
+    border-left: 4px solid ~"color-mix(in srgb, var(--dusk-accent) 45%, transparent)";
+    margin-left: -2px;
+    background: none;
+    padding-left: 20px;
+    color: var(--dusk-accent);
+    font-size: 11px;
+    letter-spacing: .04em;
+  }
+
+  // The posts on screen: an accent segment with a glowing ring at its middle.
+  .Scrubber-bar {
+    position: relative;
+    width: 4px;
+    margin-left: -2px;
+    border-radius: 2px;
+    background: var(--dusk-accent);
+    box-shadow: 0 0 10px ~"color-mix(in srgb, var(--dusk-accent) 55%, transparent)";
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 16px;
+      height: 16px;
+      margin: -8px 0 0 -8px;
+      box-sizing: border-box;
+      border-radius: 50%;
+      background: var(--dusk-surface);
+      border: 3px solid var(--dusk-accent);
+      box-shadow: 0 0 0 4px ~"color-mix(in srgb, var(--dusk-accent) 20%, transparent)";
+    }
+  }
+
+  // The position: big numerals, the count beside, the date under.
+  .Scrubber-info {
+    left: 22px;
+    width: auto;
+    margin-top: -22px;
+    white-space: nowrap;
+
+    strong {
+      font-weight: 600;
+      color: var(--muted-color);
+      font-size: 12.5px;
+    }
+  }
+  .Scrubber-index, .Scrubber-count {
+    font-family: var(--dusk-display);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: var(--heading-color);
+  }
+  .Scrubber-info .Scrubber-index {
+    font-size: 26px;
+    line-height: 1;
+    color: var(--dusk-accent);
+  }
+  .Scrubber-info .Scrubber-count { font-size: 16px; }
+  .Scrubber-description {
+    display: block;
+    margin-top: 2px;
+    font-size: 11.5px;
+    color: var(--muted-color);
+  }
+
+  // Desktop: the side list's scrubber is a glass panel.
+  @media @tablet-up {
+    .DiscussionPage-nav .item-scrubber {
+      margin-top: 16px;
+      padding: 8px 10px;
+      border-radius: var(--dusk-radius);
+      background: ~"color-mix(in srgb, var(--dusk-surface) 82%, transparent)";
+      border: 1px solid var(--dusk-line);
+      box-shadow: 0 1px 0 ~"rgba(255, 255, 255, .06)" inset, 0 12px 32px var(--shadow-color);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+    .DiscussionPage-nav .PostStreamScrubber > .Dropdown-menu {
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  // Phones: the title-bar toggle shows the numerals too, and the panel is glass.
+  @media @phone {
+    .PostStreamScrubber .Dropdown-toggle .Scrubber-index,
+    .PostStreamScrubber .Dropdown-toggle .Scrubber-count { font-size: 17px; }
+    .PostStreamScrubber > .Dropdown-menu {
+      background: ~"color-mix(in srgb, var(--dusk-surface) 92%, transparent)";
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+    }
+    .PostStreamScrubber .Scrubber-scrollbar { margin-left: 26px; }
+
+    // Core opens every dropdown as a sheet from the bottom edge; with the phone
+    // bar on, sheets float just above it so the bar stays in sight.
+    &[data-dusk-hud="on"] .Dropdown .Dropdown-menu {
+      left: 8px !important;
+      right: 8px !important;
+      bottom: ~"calc(88px + env(safe-area-inset-bottom))";
+      max-height: ~"calc(100dvh - 210px)";
+      padding-bottom: 12px !important;
+      border-radius: 18px;
+      border: 1px solid var(--dusk-line);
+      box-shadow: 0 18px 44px var(--shadow-color);
+    }
+  }
+}

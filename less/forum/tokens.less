@@ -1,0 +1,114 @@
+@font-face {
+  font-family: "Duskline Display";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("@{duskline-fonts}big-shoulders-display-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Duskline Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("@{duskline-fonts}inter-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+html[data-duskline] {
+  // Flarum's palette, light: warm sand and plum.
+  --body-bg: #FFF6EE;
+  --body-bg-shaded: #FFEFE2;
+  --body-bg-light: #FFFFFF;
+  --body-bg-faded: ~"rgba(255, 246, 238, .94)";
+  --text-color: #22172F;
+  --heading-color: #1A1026;
+  --muted-color: #6B5C7B;
+  --muted-more-color: #6E5F7E;
+  --discussion-title-color: #2E2140;
+  --control-bg: ~"rgba(70, 25, 55, .07)";
+  --control-bg-light: ~"rgba(70, 25, 55, .045)";
+  --control-bg-shaded: ~"rgba(70, 25, 55, .11)";
+  --control-color: #4A3B5C;
+  --discussion-list-item-bg-hover: var(--control-bg-light);
+  --shadow-color: ~"rgba(60, 20, 50, .14)";
+  --overlay-bg: ~"rgba(20, 8, 30, .45)";
+  --code-bg: ~"rgba(70, 25, 55, .06)";
+  --hero-bg: transparent;
+
+  --dusk-surface: #FFFFFF;
+  --dusk-surface-2: #FFEFE2;
+  --dusk-line: ~"rgba(70, 25, 55, .11)";
+  --dusk-glow-strength: .35;
+  --dusk-radius: 16px;
+  --dusk-display: "Duskline Display", "Big Shoulders Display", Oswald, Impact, sans-serif;
+  --dusk-font: "Duskline Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  // Accents: one per paint-shop choice, each with a text color that reaches 4.5:1 on it.
+  --dusk-accent: #C8314F;
+  --dusk-ink: #FFFFFF;
+  &[data-dusk-accent="magenta"] { --dusk-accent: #A3246F; }
+  &[data-dusk-accent="teal"] { --dusk-accent: #0B7F80; }
+  &[data-dusk-accent="amber"] { --dusk-accent: #9A5300; }
+  &[data-dusk-accent="ice"] { --dusk-accent: #1F66A8; }
+
+  --primary-color: var(--dusk-accent);
+  --secondary-color: var(--dusk-accent);
+  --link-color: var(--dusk-accent);
+  --button-primary-bg: var(--dusk-accent);
+  --button-primary-color: var(--dusk-ink);
+  --button-primary-bg-hover: ~"color-mix(in srgb, var(--dusk-accent) 88%, #000)";
+  --button-primary-bg-active: ~"color-mix(in srgb, var(--dusk-accent) 80%, #000)";
+  --button-primary-bg-disabled: var(--dusk-accent);
+  --border-radius: 10px;
+
+  &:not([data-colored-header="true"]) {
+    --header-bg: ~"rgba(255, 255, 255, .9)";
+    --header-color: var(--text-color);
+    --header-control-bg: var(--control-bg);
+    --header-control-color: var(--control-color);
+  }
+  // Flarum's colored header: the visitor's accent, with its readable ink.
+  &[data-colored-header="true"] {
+    --header-bg: var(--dusk-accent);
+    --header-color: var(--dusk-ink);
+    --header-control-bg: ~"color-mix(in srgb, var(--dusk-ink) 16%, transparent)";
+    --header-control-color: var(--dusk-ink);
+  }
+}
+
+// Dark: a night sky (core's dark and dark-hc).
+html[data-duskline][data-theme^="dark"] {
+  --body-bg: #0F0B1D;
+  --body-bg-shaded: #0A0714;
+  --body-bg-light: #1A1530;
+  --body-bg-faded: ~"rgba(15, 11, 29, .94)";
+  --text-color: #F3ECFF;
+  --heading-color: #FFFFFF;
+  --muted-color: #AC9FC8;
+  --muted-more-color: #9D90BA;
+  --discussion-title-color: #E6DCF7;
+  --control-bg: ~"rgba(255, 255, 255, .07)";
+  --control-bg-light: ~"rgba(255, 255, 255, .045)";
+  --control-bg-shaded: ~"rgba(255, 255, 255, .11)";
+  --control-color: #D8CCF0;
+  --shadow-color: ~"rgba(0, 0, 0, .45)";
+  --overlay-bg: ~"rgba(4, 2, 12, .6)";
+  --code-bg: ~"rgba(255, 255, 255, .07)";
+
+  --dusk-surface: #1A1530;
+  --dusk-surface-2: #241D40;
+  --dusk-line: ~"rgba(255, 255, 255, .09)";
+  --dusk-glow-strength: .6;
+
+  --dusk-accent: #FF5E86;
+  --dusk-ink: #1C0716;
+  &[data-dusk-accent="magenta"] { --dusk-accent: #FF6FCF; --dusk-ink: #1E0517; }
+  &[data-dusk-accent="teal"] { --dusk-accent: #3FD8CB; --dusk-ink: #04201E; }
+  &[data-dusk-accent="amber"] { --dusk-accent: #FFB54A; --dusk-ink: #2A1300; }
+  &[data-dusk-accent="ice"] { --dusk-accent: #7CC4FF; --dusk-ink: #06192B; }
+
+  &:not([data-colored-header="true"]) {
+    --header-bg: ~"rgba(20, 15, 38, .92)";
+  }
+}

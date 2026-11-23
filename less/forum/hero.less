@@ -1,0 +1,90 @@
+// The time-of-day hero and the sky art (shared with profile cards).
+
+html[data-duskline] {
+  .DuskSky {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #0F0B1D;
+  }
+  .DuskSky-frame, .DuskSky-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .DuskSky-frame {
+    animation: dusk-fade 1.2s ease both;
+  }
+
+  .DuskHero {
+    position: relative;
+    height: 300px;
+    padding: 0;
+    overflow: hidden;
+    background: #170F3A;
+    color: #fff;
+    text-align: left;
+  }
+  .DuskHero-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .DuskHero-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, ~"rgba(14, 6, 26, .66)" 0%, ~"rgba(14, 6, 26, .28)" 50%, ~"rgba(14, 6, 26, 0)" 75%);
+  }
+  .DuskHero-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .DuskHero-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 28px;
+    padding: 0 12px;
+    border-radius: 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #fff;
+    background: ~"rgba(0, 0, 0, .38)";
+    border: 1px solid ~"rgba(255, 255, 255, .25)";
+  }
+  &:not(#x-hi) .DuskHero-title {
+    margin: 0;
+    max-width: 680px;
+    font-family: var(--dusk-display);
+    font-size: ~"clamp(40px, 6.4vw, 78px)";
+    font-weight: 900;
+    line-height: .92;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 2px 24px ~"rgba(0, 0, 0, .35)";
+  }
+  &:not(#x-hi) .DuskHero-message {
+    max-width: 520px;
+    font-size: 16.5px;
+    color: ~"rgba(255, 255, 255, .92)";
+
+    a { color: #fff; text-decoration: underline; }
+  }
+  .DuskHero-actions {
+    margin-top: 4px;
+  }
+}
+
+@keyframes dusk-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

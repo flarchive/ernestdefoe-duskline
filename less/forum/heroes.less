@@ -1,0 +1,118 @@
+// Title heroes: a slice of the sky (the visitor's time of day) under a glow in
+// the tag's color, a large display title with a soft neon edge, the tags, and
+// for discussions the author, replies and how far you have read.
+
+html[data-duskline] {
+  .DuskSkyHero {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    min-height: 240px;
+    padding: 44px 0 26px;
+    background: #170F3A;
+    color: #fff;
+    text-align: center;
+    border-bottom: 0;
+
+    > .container { position: relative; z-index: 1; width: 100%; }
+  }
+  .DuskSkyHero-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 110% at 50% 125%, ~"color-mix(in srgb, var(--dusk-glow) 60%, transparent)", transparent 70%),
+      linear-gradient(180deg, ~"rgba(14, 6, 26, .12)" 0%, ~"rgba(14, 6, 26, .5)" 55%, ~"rgba(14, 6, 26, .82)" 100%);
+  }
+  .DuskSkyHero .DiscussionHero-items, .DuskSkyHero .Hero-content, .DuskSkyHero .containerNarrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  &:not(#x-hi) .DuskSkyHero .DiscussionHero-title,
+  &:not(#x-hi) .DuskSkyHero .Hero-title {
+    margin: 0;
+    color: #fff;
+    font-family: var(--dusk-display);
+    font-size: ~"clamp(30px, 4.6vw, 58px)";
+    font-weight: 900;
+    line-height: .95;
+    text-transform: uppercase;
+    letter-spacing: .01em;
+    text-shadow:
+      0 0 1px ~"rgba(255, 255, 255, .55)",
+      0 0 22px ~"color-mix(in srgb, var(--dusk-glow) 75%, transparent)",
+      0 2px 26px ~"rgba(0, 0, 0, .45)";
+  }
+  &:not(#x-hi) .DuskSkyHero .Hero-title .icon { color: #fff; }
+  &:not(#x-hi) .DuskSkyHero .Hero-subtitle {
+    max-width: 620px;
+    margin: 0 auto;
+    color: ~"rgba(255, 255, 255, .9)";
+    font-size: 15px;
+  }
+  .DuskSkyHero .TagLabel {
+    box-shadow: 0 0 0 1px ~"rgba(255, 255, 255, .28)", 0 6px 16px ~"rgba(0, 0, 0, .3)";
+  }
+
+  .DuskSkyHero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 16px;
+    font-size: 13px;
+    color: ~"rgba(255, 255, 255, .9)";
+  }
+  &:not(#x-hi) .DuskSkyHero-author {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+
+    .Avatar { .Avatar--size(24px); box-shadow: 0 0 0 2px ~"rgba(255, 255, 255, .5)"; }
+  }
+  .DuskSkyHero-progress {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: ~"rgba(0, 0, 0, .35)";
+    border: 1px solid ~"rgba(255, 255, 255, .22)";
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .DuskSkyHero-progressBar {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: linear-gradient(90deg, ~"rgba(63, 216, 203, .45)", ~"color-mix(in srgb, var(--dusk-accent) 60%, transparent)");
+  }
+  .DuskSkyHero-progressText { position: relative; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  // The Tags page header: the index hero, shorter.
+  .DuskHero--compact {
+    height: 180px;
+
+    .DuskHero-title { font-size: ~"clamp(36px, 5vw, 60px)"; }
+  }
+
+  @media @phone {
+    .DuskSkyHero {
+      min-height: 0;
+      padding: 22px 0 16px;
+    }
+    &:not(#x-hi) .DuskSkyHero .DiscussionHero-title,
+    &:not(#x-hi) .DuskSkyHero .Hero-title { font-size: 28px; }
+    .DuskSkyHero .DiscussionHero-items { gap: 8px; }
+    .DuskSkyHero-meta { gap: 6px 12px; font-size: 12px; }
+    .DuskSkyHero-author .Avatar { .Avatar--size(20px); }
+    .DuskHero--compact { height: 130px; }
+    &:not(#x-hi) .DuskSkyHero .Hero-subtitle { font-size: 13px; }
+  }
+}

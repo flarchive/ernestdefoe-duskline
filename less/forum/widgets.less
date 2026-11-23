@@ -1,0 +1,152 @@
+// The online radar, the paint shop and its header button.
+
+html[data-duskline] {
+  .DuskRadar {
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: var(--dusk-radius);
+    background: var(--dusk-surface);
+    border: 1px solid var(--dusk-line);
+  }
+  .DuskRadar-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .DuskRadar-title {
+    font-size: 17px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--heading-color);
+  }
+  .DuskRadar-count {
+    color: var(--dusk-accent);
+    font-weight: 700;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+  .DuskRadar-scope {
+    position: relative;
+    width: 100%;
+    max-width: 170px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 1px solid var(--dusk-line);
+    background:
+      radial-gradient(circle, transparent 0 32%, var(--dusk-line) 32.5% 33.5%, transparent 34% 65%, var(--dusk-line) 65.5% 66.5%, transparent 67%);
+  }
+  .DuskRadar-sweep {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0deg 280deg, ~"color-mix(in srgb, var(--dusk-accent) 45%, transparent)" 360deg);
+    animation: dusk-sweep 6s linear infinite;
+  }
+  &:not(#x-hi) .DuskRadar-dot {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    margin: -13px 0 0 -13px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: var(--dot);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    box-shadow: 0 0 0 2px var(--dusk-surface);
+    text-decoration: none;
+
+    img { width: 100%; height: 100%; object-fit: cover; }
+  }
+  // The quiet version: a small still dial and one line.
+  .DuskRadar--quiet {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  }
+  .DuskRadar-mini {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--dusk-line);
+    background: radial-gradient(circle, var(--dusk-accent) 0 3px, transparent 3.5px 30%, var(--dusk-line) 31% 34%, transparent 35%);
+  }
+  .DuskRadar-note {
+    color: var(--muted-color);
+    font-size: 12.5px;
+  }
+  .DuskRadar-more {
+    position: absolute;
+    right: 8%;
+    bottom: 6%;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted-color);
+  }
+
+  // Paint shop.
+  .DuskPaint-group {
+    border: 0;
+    margin: 0 0 16px;
+    padding: 0;
+
+    legend {
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: var(--heading-color);
+    }
+  }
+  .DuskPaint-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .DuskPaint-choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid var(--dusk-line);
+    background: var(--dusk-surface-2);
+    color: var(--text-color);
+    font: 600 13.5px var(--dusk-font);
+    cursor: pointer;
+
+    &.is-on {
+      border-color: var(--dusk-accent);
+      box-shadow: 0 0 0 2px var(--dusk-accent) inset;
+    }
+    &:focus-visible {
+      outline: 2px solid var(--dusk-accent);
+      outline-offset: 2px;
+    }
+  }
+  .DuskPaint-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #C8314F;
+  }
+  [data-swatch="magenta"] .DuskPaint-swatch { background: #C2318A; }
+  [data-swatch="teal"] .DuskPaint-swatch { background: #13A3A3; }
+  [data-swatch="amber"] .DuskPaint-swatch { background: #E0A100; }
+  [data-swatch="ice"] .DuskPaint-swatch { background: #4C9BE8; }
+  .DuskPaint-note {
+    margin: 4px 0 0;
+    color: var(--muted-color);
+    font-size: 12.5px;
+  }
+}
+
+@keyframes dusk-sweep {
+  to { transform: rotate(360deg); }
+}

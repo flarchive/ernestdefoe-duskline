@@ -1,0 +1,144 @@
+// Phones (core's @phone breakpoint is below 768px).
+
+html[data-duskline] {
+  .DuskHud-root { display: none; }
+
+  @media @phone {
+    .DuskHero { height: 210px; }
+    .DuskHero-shade {
+      background: linear-gradient(180deg, ~"rgba(14, 6, 26, 0)" 15%, ~"rgba(14, 6, 26, .72)");
+    }
+    .DuskHero-content {
+      justify-content: flex-end;
+      padding-bottom: 16px;
+      gap: 8px;
+    }
+    .DuskHero-message { display: none; }
+    .DuskHero-actions { display: none; }
+
+    // The strip scrolls sideways instead of squeezing four tiles.
+    .DuskStrip {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      margin: 0 0 14px;
+      padding: 6px 12px;
+      &::-webkit-scrollbar { display: none; }
+    }
+    &:not(#x-hi) .DuskTile {
+      flex: 0 0 auto;
+      width: 150px;
+      scroll-snap-align: start;
+    }
+    .DuskTile-icon { width: 32px; height: 32px; font-size: 15px; }
+
+    .DuskRadar { display: none; }
+
+    // fof/discussion-views pins its count over the row's right edge; with a long
+    // count it lands on the info line. On phones it joins the line instead.
+    .DiscussionListItem-info {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2px 6px;
+
+      > li { margin-right: 0; min-width: 0; }
+      > .item-discussion-views { position: static; }
+    }
+
+    // The list runs edge to edge on phones: no side borders or corners.
+    .DiscussionList-discussions {
+      border-left: 0;
+      border-right: 0;
+      border-radius: 0;
+    }
+
+    .DuskRoad-track {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      .DuskRoad-stop:nth-child(-n+2) { display: none; }
+      &::before { left: 10%; right: 10%; }
+      &::after { display: none; }
+    }
+
+    .Post-header > ul { gap: 4px 8px; }
+
+    // Phone avatars are 32px: the ring stays, the pill goes.
+    .DuskAvatar::after { display: none; }
+    .CommentPost[data-dusk-level] .Post-avatar { border-width: 2px; }
+
+    // The bottom bar.
+    &[data-dusk-hud="on"] {
+      .DuskHud-root { display: block; }
+      .App { padding-bottom: 92px; }
+      // Core's floating "new discussion" button would sit on the bar.
+      .App-primaryControl .Button--primary.item-newDiscussion { display: none; }
+    }
+    .DuskHud {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: ~"calc(12px + env(safe-area-inset-bottom))";
+      z-index: 260;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      border-radius: 22px;
+      background: var(--dusk-hud-bg, var(--body-bg-faded));
+      border: 1px solid var(--dusk-line);
+      box-shadow: 0 10px 30px var(--shadow-color);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      transition: transform .2s ease, opacity .2s ease;
+
+      &.is-hidden {
+        transform: translateY(140%);
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+    &:not(#x-hi) .DuskHud-item {
+      position: relative;
+      min-width: 48px;
+      min-height: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--muted-color);
+      font: 600 10.5px var(--dusk-font);
+      text-decoration: none;
+
+      .icon { font-size: 19px; }
+      &.is-active { color: var(--dusk-accent); }
+    }
+    .DuskHud-avatar { .Avatar--size(24px); }
+    .DuskHud-dot {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--dusk-accent);
+    }
+    .DuskHud-new {
+      width: 54px;
+      height: 54px;
+      margin-top: -28px;
+      border: 0;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--dusk-accent);
+      color: var(--dusk-ink);
+      font-size: 22px;
+      box-shadow: 0 8px 22px ~"color-mix(in srgb, var(--dusk-accent) 45%, transparent)";
+    }
+  }
+}

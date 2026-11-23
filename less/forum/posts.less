@@ -1,0 +1,77 @@
+// Player cards: an XP ring and level pill around avatars (Renown), and
+// Renown's own rank badge restyled as a chip.
+
+html[data-duskline] {
+  // The ring: on every avatar of a post whose author has Renown XP, and on the profile avatar.
+  .CommentPost[data-dusk-level] .Post-avatar, .DuskAvatar-wrap .Avatar {
+    border: 3px solid transparent;
+    background:
+      linear-gradient(var(--avatar-bg, var(--body-bg)), var(--avatar-bg, var(--body-bg))) padding-box,
+      conic-gradient(var(--dusk-accent) var(--dusk-xp, 0%), var(--dusk-line) 0) border-box;
+    box-shadow: 0 0 0 2px var(--body-bg);
+  }
+
+  // The level pill: under the post's side avatar (desktop) and the profile avatar.
+  .DuskAvatar {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+  }
+  .DuskAvatar::after, .DuskAvatar-wrap .UserCard-avatar::after, .DuskAvatar-wrap .AvatarEditor::after {
+    counter-reset: dusk-level var(--dusk-level, 1);
+    content: counter(dusk-level);
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    bottom: -7px;
+    transform: translateX(-50%);
+    min-width: 26px;
+    height: 18px;
+    padding: 0 6px;
+    border-radius: 9px;
+    box-sizing: border-box;
+    background: var(--dusk-surface-2);
+    border: 1px solid var(--dusk-line);
+    color: var(--text-color);
+    font: 800 12px/16px var(--dusk-display);
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+  }
+  .DuskAvatar-wrap .UserCard-avatar, .DuskAvatar-wrap .AvatarEditor {
+    position: relative;
+  }
+
+  // Post headers and profile-card info as wrapping flex rows: the name, Renown's
+  // taller chip, the time and anything else share one center line, and spacing
+  // comes from the gap (no trailing margins to push an empty second line).
+  .Post-header > ul, .UserCard-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 10px;
+
+    > li { margin: 0; display: flex; align-items: center; }
+  }
+  .Post-header .PostMeta, .Post-header .PostMeta > a, .Post-header .PostUser, .Post-header .PostUser-name, .Post-header .PostUser-name > a { display: inline-flex; align-items: center; }
+  .Post-header .username, .Post-header .PostMeta time { display: inline-block; line-height: 20px; }
+  .Post-header .RenownStanding-text { line-height: 20px; }
+  .UserCard-info { gap: 4px 16px; }
+  .RenownCardInfo { display: inline-flex; align-items: center; gap: 6px; }
+
+  .RenownPostBadge {
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    padding: 0 9px 0 4px;
+    border-radius: 12px;
+    background: var(--dusk-surface-2);
+    border: 1px solid var(--dusk-line);
+    text-decoration: none;
+  }
+  &:not(#x-hi) .RenownPostBadge .RenownStanding-text {
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: 12px;
+  }
+}

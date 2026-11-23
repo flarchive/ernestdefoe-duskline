@@ -1,0 +1,35 @@
+// Motion: the sky's slow effects, all off when the visitor asks for less.
+
+html[data-duskline] {
+  .DuskSky-flicker { animation: dusk-flicker 7s steps(1) infinite; }
+  .DuskSky-trails path { animation: dusk-trail 2.4s linear infinite; }
+  .DuskSky-trails path + path { animation-duration: 3.4s; animation-direction: reverse; }
+  .DuskSky-neon { animation: dusk-neon 5s ease-in-out infinite; }
+}
+
+@keyframes dusk-flicker {
+  0%, 62%, 66%, 100% { opacity: inherit; }
+  64% { opacity: .1; }
+}
+@keyframes dusk-trail {
+  to { stroke-dashoffset: -152; }
+}
+@keyframes dusk-neon {
+  50% { opacity: .82; }
+}
+
+.dusk-still() {
+  .DuskSky-frame, .DuskSky-art *, .DuskTile, .DuskTile--new, .DuskRadar-sweep, .DuskHud, .DiscussionListItem, .Button--primary, .TagTile {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-duskline] { .dusk-still(); }
+}
+html[data-duskline][data-dusk-motion] { .dusk-still(); }
+// "Reduced" keeps hover feedback; "off" keeps nothing.
+html[data-duskline][data-dusk-motion="reduced"] {
+  .DuskTile, .DuskHud, .DiscussionListItem, .Button--primary { transition: opacity .15s ease !important; }
+  .DuskTile:hover, .Button--primary:hover, .TagTile:hover { transform: none !important; }
+}

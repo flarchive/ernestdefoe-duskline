@@ -1,0 +1,97 @@
+{
+    "name": "ernestdefoe/duskline",
+    "description": "Duskline: a gaming theme for Flarum 2. An illustrated neon coastal skyline whose sky follows each visitor's local time, with player cards, glowing tag tiles and a member paint shop.",
+    "type": "flarum-extension",
+    "keywords": [
+        "flarum",
+        "flarum-extension",
+        "theme",
+        "gaming",
+        "synthwave",
+        "dark-mode"
+    ],
+    "homepage": "https://github.com/ernestdefoe/duskline",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ernestdefoe",
+            "email": "ernestdefoe@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "flarum/core": "^2.0"
+    },
+    "suggest": {
+        "ernestdefoe/renown": "Levels, ranks, XP and Prestige on player cards and profiles.",
+        "flarum/tags": "Tag tiles with an unread glow.",
+        "ernestdefoe/wardrobe": "Offer Duskline beside other themes, chosen by each member and guest.",
+        "ernestdefoe/bespoke": "Duskline stays off while Bespoke styles the forum, unless Wardrobe lets each member pick their theme.",
+        "ernestdefoe/mobile-tab": "Duskline's phone bar steps aside for Mobile Tab's own bar."
+    },
+    "autoload": {
+        "psr-4": {
+            "ErnestDefoe\\Duskline\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ErnestDefoe\\Duskline\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Duskline",
+            "category": "theme",
+            "icon": {
+                "name": "fas fa-city",
+                "backgroundColor": "#140F26",
+                "color": "#FF5E86"
+            },
+            "optional-dependencies": [
+                "ernestdefoe/renown",
+                "flarum/tags",
+                "ernestdefoe/wardrobe",
+                "ernestdefoe/bespoke",
+                "acpl/mobile-tab",
+                "ernestdefoe/mobile-tab",
+                "resofire/mobile-tab"
+            ]
+        }
+    },
+    "support": {
+        "issues": "https://github.com/ernestdefoe/duskline/issues",
+        "source": "https://github.com/ernestdefoe/duskline"
+    },
+    "require-dev": {
+        "ernestdefoe/wardrobe": "*",
+        "flarum/phpstan": "^2.0",
+        "flarum/tags": "^2.0",
+        "flarum/testing": "^2.0",
+        "laravel/pint": "^1.32"
+    },
+    "scripts": {
+        "test": [
+            "@test:unit",
+            "@test:integration"
+        ],
+        "test:unit": "phpunit -c tests/phpunit.unit.xml",
+        "test:integration": "phpunit -c tests/phpunit.integration.xml",
+        "test:setup": "@php tests/integration/setup.php",
+        "analyse:phpstan": "phpstan analyse",
+        "style": "pint --test",
+        "style:fix": "pint"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "beta",
+    "prefer-stable": true,
+    "scripts-descriptions": {
+        "test": "Runs all tests.",
+        "test:unit": "Runs all unit tests.",
+        "test:integration": "Runs all integration tests.",
+        "test:setup": "Sets up a database for use with integration tests. Execute this only once.",
+        "analyse:phpstan": "Run static analysis"
+    }
+}

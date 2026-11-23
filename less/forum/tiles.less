@@ -1,0 +1,87 @@
+// Tag tiles: the strip above the index list and the Tags page, with a glow
+// on tags that have something new since the visitor's last visit.
+
+html[data-duskline] {
+  .DuskStrip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  &:not(#x-hi) .DuskTile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    padding: 14px 16px;
+    border-radius: var(--dusk-radius);
+    background: var(--dusk-surface);
+    border: 1px solid var(--dusk-line);
+    color: var(--text-color);
+    text-decoration: none;
+    transition: transform .15s ease, box-shadow .15s ease;
+
+    &:hover, &:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px var(--shadow-color);
+    }
+  }
+  .DuskTile-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    background: var(--tag-color);
+    font-size: 17px;
+  }
+  .DuskTile-name {
+    font-weight: 700;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .DuskTile-count {
+    color: var(--muted-color);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .DuskTile-new {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    height: 22px;
+    padding: 0 9px;
+    border-radius: 11px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--dusk-ink);
+    background: var(--dusk-accent);
+  }
+  .DuskTile--new {
+    --dusk-glow: var(--tag-color, var(--tag-bg, var(--dusk-accent)));
+    box-shadow: 0 0 0 2px var(--dusk-glow), 0 0 22px ~"color-mix(in srgb, var(--dusk-glow) 40%, transparent)";
+    animation: dusk-glow 3.2s ease-in-out infinite;
+  }
+  &[data-theme^="dark"] .DuskTile--new {
+    box-shadow: 0 0 0 2px var(--dusk-glow), 0 0 26px ~"color-mix(in srgb, var(--dusk-glow) 65%, transparent)";
+  }
+
+  // The Tags page's own tiles: rounder, with the same glow.
+  .TagTile {
+    border-radius: var(--dusk-radius);
+    overflow: hidden;
+  }
+  .TagTiles {
+    gap: 14px;
+  }
+}
+
+@keyframes dusk-glow {
+  50% { filter: brightness(1.08); }
+}

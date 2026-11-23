@@ -1,0 +1,156 @@
+// The frame: type, header, buttons, lists, cards, dropdowns and modals.
+// Core's layout is untouched; only its surfaces are restyled.
+
+html[data-duskline] {
+  body {
+    font-family: var(--dusk-font);
+    background: var(--body-bg);
+    color: var(--text-color);
+  }
+
+  // Display type: page titles and heroes, never body text.
+  .Hero-title, .DiscussionHero-title, .TagHero .Hero-title, .UserCard-identity, .TagTile-name, .DuskRoad-title, .DuskRadar-title {
+    font-family: var(--dusk-display);
+    letter-spacing: .01em;
+  }
+  .DiscussionHero-title, .Hero-title {
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  // Header: a frosted bar.
+  #header, .App-header {
+    background: var(--header-bg);
+    color: var(--header-color);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    backdrop-filter: saturate(140%) blur(12px);
+    box-shadow: 0 1px 0 var(--dusk-line);
+  }
+  .Header-title {
+    font-family: var(--dusk-display);
+    font-weight: 800;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+  }
+  &:not(#x-hi) .Header-title a { color: var(--header-color); }
+
+  // Buttons: rounder, firmer.
+  .Button {
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  .Button--primary {
+    box-shadow: 0 6px 18px ~"color-mix(in srgb, var(--dusk-accent) 28%, transparent)";
+  }
+
+  // Index navigation: soft pills.
+  .IndexPage-nav .item-allDiscussions > a, .sideNav .Dropdown--select .Dropdown-menu > li > a, .sideNav .Dropdown--select .Dropdown-menu > li > .Button {
+    border-radius: 10px;
+  }
+  @media @tablet-up {
+    .sideNav .Dropdown--select .Dropdown-menu > li > a,
+    .sideNav .Dropdown--select .Dropdown-menu > li > .Button {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+  }
+  .sideNav .Dropdown--select .Dropdown-menu > li.active > a, .sideNav .Dropdown--select .Dropdown-menu > li.active > .Button {
+    background: var(--dusk-surface-2);
+    color: var(--dusk-accent);
+    font-weight: 600;
+  }
+
+  // The discussion list as one card. No overflow clipping: each row's menu must open.
+  .DiscussionList-discussions {
+    background: var(--dusk-surface);
+    border: 1px solid var(--dusk-line);
+    border-radius: var(--dusk-radius);
+    padding: 4px 0;
+
+    > li + li .DiscussionListItem {
+      border-top: 1px solid var(--dusk-line);
+    }
+  }
+  .DiscussionListItem {
+    border-radius: 0;
+    margin: 0 4px;
+  }
+  .DiscussionListItem-title {
+    color: var(--discussion-title-color);
+    font-weight: 600;
+  }
+  // Tags: flarum/tags pins them into a 150px column that fades out the rest.
+  // Here they sit in the info line and wrap, so every tag is readable.
+  @media @tablet-up {
+    .IndexPage, .UserPage, .DiscussionList--floatingTags {
+      .DiscussionListItem-title { margin-right: 0; }
+      .DiscussionListItem-info > .item-tags {
+        position: static;
+        max-width: none;
+        white-space: normal;
+        overflow: visible;
+        -webkit-mask-image: none;
+        mask-image: none;
+        margin-right: 4px;
+      }
+    }
+  }
+  .DiscussionListItem-info > .item-tags .TagsLabel {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    white-space: normal;
+  }
+
+  .DiscussionListItem-count, .DiscussionListItem-info .item-discussion-views {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  // Cards, dropdowns, modals: the same surface and line.
+  .Dropdown-menu, .Modal-content, .Composer, .UserCard--popover, .PostPreview, .NotificationList, .Search-results {
+    background: var(--dusk-surface);
+    border: 1px solid var(--dusk-line);
+  }
+  .Dropdown-menu, .Modal-content {
+    border-radius: 14px;
+  }
+  .Modal-header {
+    border-radius: 14px 14px 0 0;
+  }
+  .Modal-header .App-titleControl, .Modal-title {
+    font-family: var(--dusk-display);
+    font-weight: 800;
+    font-size: 26px;
+    text-transform: uppercase;
+  }
+  .FormControl {
+    border-radius: 10px;
+  }
+
+  // Discussion page hero.
+  .DiscussionHero {
+    background: var(--dusk-surface-2);
+    border-bottom: 1px solid var(--dusk-line);
+  }
+  &:not(#x-hi) .DiscussionHero-title { color: var(--heading-color); }
+
+  // Posts sit on the page; one straight hairline between them (on the stream
+  // item, which has no rounded corners; not above the reply box).
+  .PostStream-item + .PostStream-item:not(:has(.ReplyPlaceholder)) {
+    border-top: 1px solid var(--dusk-line);
+  }
+
+  // Tag labels: rounded.
+  .TagLabel {
+    border-radius: 6px;
+  }
+
+  // Density (paint shop).
+  &[data-dusk-density="compact"] {
+    .DiscussionListItem-content { padding-top: 8px; padding-bottom: 8px; }
+    .DiscussionListItem-info { margin-top: 0; }
+  }
+}
